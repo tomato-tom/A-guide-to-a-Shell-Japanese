@@ -1,73 +1,74 @@
-# Configure the Shell
+# シェルの設定
 
-This article focus on configuring the shell of a-Shell. The default (and the only) shell on a-Shell is not `bash`, but `dash`. There are differences between a-Shell’s default shell (the shell you see when you start the App) and `dash` (the shell to execute scripts) and you can run `dash` to see how `dash` works.
+この記事では、a-Shellのシェルの設定に焦点を当てています。a-Shellのデフォルト（かつ唯一の）シェルは`bash`ではなく`dash`です。a-Shellのデフォルトシェル（アプリを起動したときに表示されるシェル）と`dash`（スクリプトを実行するシェル）には違いがあり、`dash`を実行して`dash`がどのように動作するかを確認できます。
 
-### Why dash?
+### なぜdashを使うのか？
 
-It’s a difficult task to include a shell in a-Shell. Among the various shells we can choose, `dash` is a simpler and lighter one.
+a-Shellにシェルを含めるのは難しいタスクです。さまざまなシェルの中から選択できる中で、`dash`はよりシンプルで軽量なものです。
 
-Although `bash` is used more commonly, it can‘t be included in a-Shell, because it’s under GPL. `zsh` is much more complex, but it’s on the to-do list. If it can be included successfully, the user’s experience would be greatly improved.
+`bash`は一般的に使用されていますが、GPLの下にあるため、a-Shellには含めることができません。`zsh`ははるかに複雑ですが、将来的に追加される予定です。成功裏に含めることができれば、ユーザーエクスペリエンスが大幅に向上するでしょう。
 
-### Execute scripts
+### スクリプトの実行
 
-As `dash` is POSIX-compatible, standard shell scripts are able to be executed. But one thing should be noticed: a number of scripts relies on `bash` actually. The first lines of some scripts is not `/usr/bin/env sh` but `/usr/bin/env bash`, making it not work, even including original `neofetch`. You can try to change `bash` to `dash` or `sh`, but all scripts using the features of `bash` won’t work anyway. In many cases you have to rewrite the script to avoid that. This may be improved if `zsh` can be added in the future.
+`dash`はPOSIX互換なので、標準のシェルスクリプトを実行できます。ただし、1つ注意するべき点があります。多くのスクリプトは実際には`bash`に依存しています。一部のスクリプトの最初の行が `/usr/bin/env sh` ではなく `/usr/bin/env bash` になっており、これにより、`bash`を含むオリジナルの `neofetch` など、動作しなくなります。`bash`を`dash`または`sh`に変更して試すこともできますが、`bash`の機能を使用するすべてのスクリプトはどちらにせよ動作しません。これを回避するためには、スクリプトを書き直す必要があります。将来的に`zsh`が追加されると、これが改善される可能性があります。
 
-### .profile and .bashrc
+### .profileと.bashrc
 
-`~/Documents/.profile` and `~/Documents/.bashrc` are provided to let you define what to do when the shell starts. When a new a-Shell window starts, both `~/Documents/.profile` and `~/Documents/.bashrc` are loaded, and when `dash` starts, only `~/Documents/.profile` is loaded. That’s the difference between them. You can add many things to the two scripts: environment variables, alias, the prompt, etc. For example, add a alias to your `.profile`:
+`~/Documents/.profile` および `~/Documents/.bashrc` は、シェルの起動時に何を行うかを定義するために提供されています。新しいa-Shellウィンドウが開始されると、`~/Documents/.profile` および `~/Documents/.bashrc` の両方が読み込まれ、`dash`が起動すると、`~/Documents/.profile` のみが読み込まれます。それがそれらの間の違いです。これらのスクリプトには多くのことを追加できます：環境変数、エイリアス、プロンプトなど。たとえば、`.profile` にエイリアスを追加できます：
 
 ```bash
-alias md=‘mkdir’
+alias md='mkdir'
 ```
 
-### Define the prompt
+### プロンプトの定義
 
-Zsh lovers may be addicted to the colorful prompts of the terminal. The good news is that you can also change what the prompt looks like on a-Shell, but it’s not as easy as how you “set a theme” on `zsh` or `fish`.
+Zshの愛用者は、端末のカラフルなプロンプトに夢中になるかもしれません。嬉しいことに、a-Shellでもプロンプトの外観を変更できますが、これは `zsh` や `fish` で "テーマを設定" するのと同じくらい簡単ではありません。
 
-What the prompt looks like is defined by the variable `$PS1`. For example, you can set it to a character you like:
+プロンプトの外観は変数 `$PS1` によって定義されます。たとえば、好きな文字に設定できます：
 
 ```bash
-$ export PS1=‘>’
+$ export PS1='>'
 >
 ```
 
-Sometimes we want to know the current path or other useful information via the prompt. Here are some parameters you can use:
+時々、プロンプトを通じて現在のパスや他の有用な情報を知りたいことがあります。以下は使用できるいくつかのパラメータです：
 
-* `\d`: the current date
-* `\u`: the username stored at `$USERNAME`, `mobile` by default
-* `\s`: the shell’s name
-* : the end of a line, used to start a new line
-* : the current time, going by hh:mm:ss and 24-hour format
-* : the current time, going by hh:mm:ss and 12-hour format
-* `\@`: the current time, going by hh:mm and 12-hour format
-* `\A`: the current time, going by hh:mm and 24-hour format
-* `\v`: the current version of a-Shell
-* `\V`: the current version and build number of a-Shell
-* `\w`: the current complete path
-* `\W`: the current working dictionary, not the complete path
-* `\!` and `\#`: the number of the command, not working correctly now
-* `\$`: judge if the account is `root`, `#` if yes while `$` if no (it won’t be yes even if you‘ve jailbroken)
-* `\\`: a backslash
-* `\[` and `\]`: start or stop a place of non-printed characters, which is used to define controlling characters like changing the color
+* `\d`：現在の日付
+* `\u`： `$USERNAME` に格納されたユーザー名（デフォルトは `mobile`）
+* `\s`：シェルの名前
+* `$`：行の終わり、新しい行を開始するために使用
+* `\t`：現在の時刻、hh:mm:ss および24時間形式で表示
+* `\T`：現在の時刻、hh:mm:ss および12時間形式で表示
+* `\@`：現在の時刻、hh:mm および12時間形式で表示
+* `\A`：現在の時刻、hh:mm および24時間形式で表示
+* `\v`：a-Shellの現在のバージョン
+* `\V`：a-Shellの現在のバージョンとビルド番号
+* `\w`：現在の完全なパス
+* `\W`：現在の作業ディレクトリ、完全なパスではない
+* `\!` および `\#`：コマンドの番号、現在は正しく動作していない
+* `\$`：アカウントが `root` であるかどうかを判別し、はいの場合は `#`、いいえの場合は `$`（ジェイルブレイクしていても `yes` にはなりません）
+* `\\`：バックスラッシュ
+* `\[` および `\]`：非印刷文字の場所の開始または停止、色の変更などの制御文字を定義するために使用されます
 
-You can use ANSI controlling characters to define colors or other styles. Here is an example:
+ANSIの制御文字を使用して色や他のスタイルを定義できます。以下は例です：
 
+```bash
+$ export PS1='\[\033[034m\]\w\[\033[0m\]\$'
 ```
-$ export PS1=‘\[\033[034m\]\w\[\033[0m\]\$’
-```
 
-Add the command to `.bashrc` so that it can be loaded every time a-Shell starts.
+このコマンドを `.bashrc` に追加して、a-Shellが起動するたびにロードされるようにします。
 
-Now guess how to get a rainbow-style prompt like this. Nerd fonts will be needed for arrays.
+さて、このような虹色のスタイルのプロンプトをどのようにして取得するかを推測してみてください。アレイにはNerdフォントが必要です。
 
-<figure><img src="../.gitbook/assets/34977EE6-3A93-4E5E-A2F4-108E57599302.jpeg" alt=""><figcaption><p>A rainbow-style prompt</p></figcaption></figure>
+<figure><img src="../.gitbook/assets/34977EE6-3A93-4E5E-A2F4-108E57599302.jpeg" alt=""><figcaption><p>虹色のスタイルのプロンプト</p></figcaption></figure>
 
-Attention this feature only works for a-Shell’s default shell (the one when a-Shell starts) but not for `dash`. When you run `dash`, you can only get a series of strange codes.
+注意：この機能はa-Shellのデフォルトシェル（a-Shellが起動したときのシェル）にのみ対応しており、`dash`には対応していません。`dash`を実行すると、一連の奇妙なコードしか取得できません。
 
-You may want to add a command to the variable like `` `pwd` ``. However, it doesn’t work with a-Shell, so you can’t see `git status` on the prompt.
+変数に `` `pwd` `` のようなコマンドを追加したいかもしれません。ただし、これはa-Shellでは機能しないため、プロンプトで `git status` を表示することはできません。
 
-### Define colors of ls
+### lsの色の定義
 
 {% hint style="info" %}
-This part is planned.
+この部分は計画中です。
 {% endhint %}
+

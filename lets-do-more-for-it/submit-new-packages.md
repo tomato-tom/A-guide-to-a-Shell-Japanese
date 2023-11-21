@@ -1,60 +1,60 @@
-# Submit new packages
+# パッケージの提出
 
-Sometimes you want to release your projects to the `pkg` repository so that everyone can use it. So far the most packages are distributed in WebAssembly, but actually almost everything running well with a-Shell can be released(except native binary codes). This article focus on making a project ready for being released at the `pkg` repository.
+時折、プロジェクトを `pkg` リポジトリにリリースして、誰もがそれを利用できるようにしたいことがあります。現時点では、ほとんどのパッケージがWebAssemblyで配布されていますが、実際にはa-Shellで正常に動作するほぼすべてのものがリリース可能です（ネイティブバイナリコードを除く）。この記事では、`pkg` リポジトリにリリースの準備ができたプロジェクトに焦点を当てています。
 
-### The structure of a package
+### パッケージの構造
 
-The offical repository is stored at [https://github.com/holzschu/a-Shell-commands](https://github.com/holzschu/a-Shell-commands). To prepare a package, three parts are needed: the install script, the man page and the uninstall script. Let’s see an example `expand`.
+公式のリポジトリは [https://github.com/holzschu/a-Shell-commands](https://github.com/holzschu/a-Shell-commands) に保存されています。パッケージを準備するには、インストールスクリプト、manページ、アンインストールスクリプトの3つの部分が必要です。例として `expand` を見てみましょう。
 
-Here is its install script:
+以下はそのインストールスクリプトです：
 
 ```bash
 #! /bin/sh
-# Default install file for packages:
+# パッケージのデフォルトインストールファイル：
 
 packagename=${0##*/}
 
-# download command:
+# ダウンロードコマンド：
 curl -L https://github.com/holzschu/a-Shell-commands/releases/download/0.1/$packagename -o ~/Documents/bin/$packagename --create-dirs --silent
 chmod +x ~/Documents/bin/$packagename
-# download man page
+# manページのダウンロード
 curl -L https://raw.githubusercontent.com/holzschu/a-Shell-commands/master/man/man1/$packagename.1 -o ~/Library/man/man1/$packagename.1 --create-dirs --silent
-# refresh man database
+# manデータベースのリフレッシュ
 mandocdb ~/Library/man
-# download uninstall information:
+# アンインストール情報のダウンロード：
 curl -L https://raw.githubusercontent.com/holzschu/a-Shell-commands/master/uninstall/$packagename -o ~/Documents/.pkg/$packagename --create-dirs --silent
 ```
 
-The install script downloads the binary file (scripts sometimes) to `~/Documents/bin/` or `~/Library/bin/` that is stored at `$PATH`, then gets the man page, refreshes the man database,and finally downloads the uninstall script. The binary file(s) can be stored at a repository (anywhere in fact) and for a single command it can be parsed with `curl`. Here’s it’s uninstall script:
+インストールスクリプトは、バイナリファイル（スクリプトの場合もあります）を `~/Documents/bin/` または `~/Library/bin/` にダウンロードします。これは `$PATH` に保存されており、その後manページを取得し、manデータベースを更新し、最後にアンインストールスクリプトをダウンロードします。バイナリファイルはリポジトリ（実際はどこでも）に保存でき、単一のコマンドに対しては `curl` で解析できます。以下はそのアンインストールスクリプトです：
 
 ```bash
 #! /bin/sh
 
-# Default uninstall file for packages:
+# パッケージのデフォルトアンインストールファイル：
 packagename=${0##*/}
 
-# remove command
+# コマンドの削除
 rm ~/Documents/bin/$packagename
-# remove man page
+# manページの削除
 rm ~/Library/man/man1/$packagename.1
-# refresh man database
+# manデータベースのリフレッシュ
 mandocdb ~/Library/man
 ```
 
-The uninstall script just clears everything about the package: the binary file, and the man page. For a more comlex project, remember to remove any app data by your package.
+アンインストールスクリプトは、パッケージに関するすべてをクリアします：バイナリファイルとmanページ。より複雑なプロジェクトの場合、パッケージに関連するアプリケーションデータを削除することを忘れないでください。
 
-Now we have clarified: an install script is needed for `pkg install` to execute while an uninstall script is needed as well, except it is for `pkg uninstall`. Usually the man page is also needed although it isn't required because it isn't always necissary. The install script is stored at the repository and it indicates where the other parts of the package are stored at.
+これでわかりました：`pkg install` が実行するためにはインストールスクリプトが必要で、アンインストールスクリプトも同様に必要です（ただし `pkg uninstall` に対応）。通常、manページも必要ですが、必ずしも必要ではないので要件によります。インストールスクリプトはリポジトリに保存されており、パッケージの他の部分がどこに保存されているかを示しています。
 
-### An example
+### 例
 
 {% hint style="info" %}
-This part is still on progress.
+この部分はまだ進行中です。
 {% endhint %}
 
-`cowsay` is an old and famous project written in Perl. To have it installed, we may clone the GitHub mirror repository first:
+`cowsay` はPerlで書かれた古くて有名なプロジェクトです。これをインストールするには、まずGitHubのミラーリポジトリをクローンすることができます：
 
 ```
 $ lg2 clone https://github.com/schacon/cowsay
 ```
 
-We can see there is an `install.sh` on the repository. Actually it does not work with a-Shell and `dash` while it’s not essential. We’ll rewrite the installation script for it.
+リポジトリには `install.sh` があります。実際にはa-Shellと `dash` では機能しませんが、これは本質的ではありません。それを再書きしてみましょう。

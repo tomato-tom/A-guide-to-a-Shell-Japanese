@@ -1,38 +1,37 @@
-# Configure your Vim
+# Vimの設定
 
-### Using Vim 8’s built-in package manager
+### Vim 8の組み込みパッケージマネージャーを使用する
 
-Many users have got used to package managers like `vim-plug`. Unfortunately, `vim-plug` has many problems with a-Shell. It’s recommended to turn to Vim 8’s native package managers, instead. You can run `:help packages` inside Vim for more information.
+多くのユーザーは `vim-plug` のようなパッケージマネージャーに慣れていますが、残念ながら `vim-plug` はa-Shellで多くの問題があります。代わりに Vim 8 のネイティブなパッケージマネージャーを使用することがお勧めです。Vim内で `:help packages` を実行すると、詳細な情報が得られます。
 
-#### Installing, updating and removing packages manually
+#### パッケージの手動でのインストール、更新、削除
 
-For Vim 8 of a-Shell, packages can be stored at `~/Documents/.vim/pack/*/start` or `~/Documents/.vim/pack/*/opt`, where `*` means any name you like. Each package has its own dictionary, making it easier to upgrade or remove them. All packages located in `~/Documents/.vim/pack/*/start` will be loaded automatically when Vim starts, while all those at `~/Documents/.vim/pack/*/opt` won’t. Themes should be stored at the `opt` dictionaries to avoid unpredictable problems. For example, let’s try to install NERDTree:
+a-ShellのVim 8では、パッケージは `~/Documents/.vim/pack/*/start` または `~/Documents/.vim/pack/*/opt` に保存できます。ここで `*` は任意の名前を意味します。各パッケージは独自のディレクトリを持っており、これによりそれらを簡単にアップグレードまたは削除できます。`~/Documents/.vim/pack/*/start` にあるすべてのパッケージは、Vimが起動するときに自動的に読み込まれます。一方、`~/Documents/.vim/pack/*/opt` にあるものは読み込まれません。予測不可能な問題を避けるために、テーマは `opt` のディレクトリに保存することが推奨されます。例えば、NERDTreeをインストールしてみましょう：
 
 ```bash
-# It’s supposed you’ve already created the dictionary.
+# 既にディレクトリを作成していると仮定します。
 $ cd ~/Documents/.vim/pack/mypackages/start/nerdtree
 $ lg2 clone https://github.com/preservim/nerdtree.git
 ```
 
-When you want to update the package, you just need to run `lg2 pull` at its dictionary, and when you want to remove it, just delete it’s dictionary completely would be okay.
+パッケージを更新したい場合は、そのディレクトリで `lg2 pull` を実行するだけで、削除したい場合はそのディレクトリを完全に削除すれば良いです。
 
-#### Importing packages
+#### パッケージのインポート
 
-For packages not to be loaded automatically, we just need to run a command inside Vim to load it:
+自動的に読み込まれないパッケージについては、Vim内でコマンドを実行するだけです：
 
 ```
 :packadd <package>
 ```
 
-You can also write the command to `.vimrc` to load it automatically and suitably for complex needs.
+また、`.vimrc` にコマンドを記述して、複雑なニーズに合わせて自動的に読み込むこともできます。
 
-### Edit .vimrc file
+### .vimrcファイルの編集
 
-`.vimrc` stores at `~/Documents` dictionary. Just add anything you want to it to configure your Vim!
+`.vimrc` は `~/Documents` ディレクトリに保存されています。Vimを構成するために追加したいものは何でも追加してください！
 
-### Manage packages automatically
+### パッケージを自動的に管理
 
 {% hint style="info" %}
-This part would be written when `pack` is released.
+この部分は `pack` がリリースされたときに書かれる予定です。
 {% endhint %}
-

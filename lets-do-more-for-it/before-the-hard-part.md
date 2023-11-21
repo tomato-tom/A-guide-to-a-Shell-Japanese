@@ -1,28 +1,28 @@
-# Before the hard part
+# 難しい部分の前に
 
-Everyone reading this chapter of the guide book must be unsatisfied by the functions a-Shell already has, and at this chapter we will talk about various possibilities of what this App can do.
+このガイドブックのこの章を読んでいるすべての人は、a-Shellが既に持っている機能に不満を持っているはずであり、この章ではこのアプリができるさまざまな可能性について話します。
 
-Attention that this road is filled with big challenges. Sometimes you have to learn a number of concepts or search on the Internet again and again just to deal with a confusing error. If you are ready now, start your hacking trip!
+この道は大きな挑戦でいっぱいです。混乱したエラーに対処するために何度も概念を学んだり、インターネットで検索したりすることがあります。もし今準備ができているなら、ハッキングの旅を始めましょう！
 
-### How do programs work?
+### プログラムはどのように動作するのか？
 
-This is one of the most important problems of this topic. All programs working on a-Shell are divided into two kinds:
+これはこのトピックの中で最も重要な問題の1つです。a-Shellで動作するすべてのプログラムは、次の2つに分類されます。
 
-* Native binary codes, for `ios` and `arm64`. They work just like what normal Apps work, and theoretically they can do anything. To compile these kinds of codes, you need a Mac computer with Xcode installed, and to distribute it, you must resign the App with an developer account. Updates must be pushed to the App Store and all users have no ability to add new functions or remove them.
-* WebAssembly codes, called by `wasm`. They can do simpler works and you can use any computer to compile it (even a-Shell itself). They can be added or removed by users and a simple tool `pkg` is provided to manage `wasm` packages.
+* ネイティブのバイナリコード、`ios` および `arm64` 用。これらは通常のアプリが動作するのと同じように動作し、理論的には何でもできます。これらの種類のコードをコンパイルするには、XcodeがインストールされたMacコンピューターが必要であり、配布するには開発者アカウントでアプリを再署名する必要があります。更新はApp Storeにプッシュする必要があり、すべてのユーザーは新しい機能を追加したり、削除したりする能力はありません。
+* WebAssemblyコード、`wasm` と呼ばれるもの。これらはより単純な作業を行うことができ、任意のコンピューターでコンパイルできます（a-Shell自体でも可能）。ユーザーが追加または削除でき、`wasm` パッケージを管理するための簡単なツール `pkg` が提供されています。
 
-Consider do you want to compile your codes to native codes or WebAssembly codes, which is decided by whether the project is complex and whether it’ll be welcomed by the majority of the users.
+プロジェクトをネイティブコードにコンパイルするか、WebAssemblyコードにコンパイルするかは、プロジェクトが複雑かどうか、およびそれが大多数のユーザーに歓迎されるかどうかによります。
 
-### What would be talked about at this chapter?
+### この章では何が話される予定ですか？
 
-This part is in progress and not finally determined.
+この部分は進行中であり、最終的に確定していません。
 
-* To compile a project in C/C++ to WebAssembly files with a-Shell’s own tool chain
-* To cross-compile a project with a real computer environment’s tool chain to WebAssembly files, with `make`, `cmake` or other tools
-* To submit new packages to a-Shell’s extension repository
-* To add new commands to a-Shell itself and compile the project
-* Go and WebAssembly
-* The possibilities of Rust
+* a-Shell独自のツールチェーンを使用してC/C++プロジェクトをWebAssemblyファイルにコンパイルする方法
+* 実際のコンピューター環境のツールチェーンを使用してプロジェクトをWebAssemblyファイルにクロスコンパイルする方法（`make`、`cmake`、またはその他のツールを使用）
+* a-Shellの拡張リポジトリに新しいパッケージを提出する方法
+* a-Shell自体に新しいコマンドを追加し、プロジェクトをコンパイルする方法
+* GoとWebAssembly
+* Rustの可能性
 * Node.js? JSCompiler?
-* Some interesting ideas
+* いくつかの面白いアイデア
 

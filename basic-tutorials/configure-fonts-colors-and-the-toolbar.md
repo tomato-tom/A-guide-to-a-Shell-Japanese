@@ -1,73 +1,72 @@
-# Configure fonts, colors and the toolbar
+# フォント、色、およびツールバーの設定
 
-`config` command is provided to allow users to configure the fonts, the color of the text and the background, and the toolbar.
+`config`コマンドを使用して、ユーザーはフォント、テキストおよび背景の色、およびツールバーを構成できます。
 
-### In a word
+### 簡単に言うと
 
 ```
 usage: config [-s font size][-n font name][-b background color][-f foreground 
 color][-c cursor color][-k shape][-dgprth]
 ```
+* `-s font size`: テキストのサイズを変更
+* `-n font name`: フォントを変更
+* `-b background color`: 背景色を変更
+* `-f foreground color`: テキストの色を変更
+* `-c cursor color`: カーソルの色を変更
+* `-k shape`: カーソルの形状を変更（`shape`はビーム、ブロック、またはアンダーラインにできます）
 
-* `-s font size`: change the size of the text
-* `-n font name`: change the font
-* `-b background color`: change the background color
-* `-f foreground color`: change the text color
-* `-c cursor color`: change the color of the cursor
-* `-k shape`: change the shape of the cursor, where `shape` can be beam, block or underline
+上記のコマンドでは、`default`を使用して以前に保存された状態に戻すことができ、`factory`を使用して初期の状態に戻すことができます。
 
-For commands above, `default` can be used to return to the status stored before, and `factory` can be used to go back to the factory status.
+* `-d`: 変更を保存せずに以前の状態に戻る
+* `-g`: 変更をすべての開いているウィンドウに適用する
+* `-p`: 変更を保存して永続的に適用する
+* `-r`: 初期の状態に戻る：白い背景と黒いテキスト
+* `-t`: ツールバーの構成ファイルを生成
+* `-h`: ヘルプテキストを表示
 
-* `-d`: do not save the changes and go back to the precious status
-* `-g`: apply the change to all the open windows
-* `-p`: save the change to apply it permanently
-* `-r`: go back to the initial status: white background and black text
-* `-t`: generate a toolbar configuration file
-* `-h`: print the help text
+### フォント
 
-### Font
+まず、自分のコンソールフォントを手動で用意する必要があります。[https://www.nerdfonts.com](https://www.nerdfonts.com)からのNerdフォントを使用することをお勧めします。これにはさまざまなアイコンが含まれています。フォントファイルをデバイスにダウンロードして、iFontsなどのアプリを使用してインストールしてください。
 
-First you have to prepare your own console font manually. It’s recommended to use a nerd font from [https://www.nerdfonts.com](https://www.nerdfonts.com), which includes various icons. Download a font file to your device, then use an App like iFonts to have it installed.
-
-In this example, we’ll use `UbuntuMono Nerd Font Mono`. Go back to a-Shell and just run:
+この例では、`UbuntuMono Nerd Font Mono`を使用します。a-Shellに戻り、次のように実行します：
 
 ```
 $ config -n ‘UbuntuMono Nerd Font Mono’
 ```
 
-If you don’t know the name of your font, use `config -n` to open a font menu and choose one then.
+フォントの名前がわからない場合は、`config -n`を使用してフォントメニューを開き、選択してください。
 
-<figure><img src="../.gitbook/assets/4D2C7F31-8B19-4CEC-B5D1-B0940275F88C.jpeg" alt=""><figcaption><p>The font menu</p></figcaption></figure>
+<figure><img src="../.gitbook/assets/4D2C7F31-8B19-4CEC-B5D1-B0940275F88C.jpeg" alt=""><figcaption><p>フォントメニュー</p></figcaption></figure>
 
-### Color
+### 色
 
-You may want a terminal with a black background and white/green text. Let’s run:
+黒い背景と白い/緑のテキストを持つターミナルが欲しいかもしれません。次のように実行します：
 
 ```
 $ config -b black -f white -c white
 ```
 
-Use any other colors if you like.
+好きな色を使用してください。
 
-Then save all the settings:
+その後、すべての設定を保存します：
 
 ```
 $ config -gp
 ```
 
-Sometimes it looks like:
+時折、以下のように見えることがあります：
 
-<figure><img src="../.gitbook/assets/68779072-3337-4915-A0A0-164394ED4052.png" alt=""><figcaption><p>The status bar and keyboard is stIll whIte</p></figcaption></figure>
+<figure><img src="../.gitbook/assets/68779072-3337-4915-A0A0-164394ED4052.png" alt=""><figcaption><p>ステータスバーとキーボードはまだ白い</p></figcaption></figure>
 
-Wait, why there is still somewhere not dark as the background? These two places are only dark when the device is in dark mode. If you want those to keep light or dark, you can configure it on the Settings App. Start Settings, and you’ll find “a-Shell” at the left menu. Now you see the settings of a-Shell:
+待ってください、なぜまだ背景と同じくらい暗い場所がありますか？これらの2つの場所は、デバイスがダークモードのときだけ暗いです。これらを明るくまたは暗く保ちたい場合は、設定アプリで構成できます。設定を開始し、「a-Shell」を左側のメニューで見つけます。今、a-Shellの設定が表示されます：
 
-<figure><img src="../.gitbook/assets/4E304434-1F28-4CED-AD7B-F85D4060DAAD.jpeg" alt=""><figcaption><p>The setting menu of a-Shell</p></figcaption></figure>
+<figure><img src="../.gitbook/assets/4E304434-1F28-4CED-AD7B-F85D4060DAAD.jpeg" alt=""><figcaption><p>a-Shellの設定メニュー</p></figcaption></figure>
 
-Click “toolbar color”, and you will find four options: `system settings`, `depends on screen color`, `dark mode` and `light mode`. Just choose the one you prefer.
+「ツールバーカラー」をクリックすると、4つのオプションが表示されます：`システム設定`、`画面の色による`、`ダークモード`、および`ライトモード`。好みのものを選択してください。
 
-### Toolbar
+### ツールバー
 
-The buttons of the toolbar at the bottom of the screen is also customizable. First, generate a toolbar configuration file:
+画面下部のツールバーのボタンもカスタマイズ可能です。まず、ツールバー構成ファイルを生成します：
 
 ```
 $ config -t
@@ -76,10 +75,10 @@ You can now edit it to add or remove buttons to the toolbar.
 Changes will take effect when the app restarts.
 ```
 
-Then you can edit `.toolbarDefinition` by Vim or Pico. Let‘s see what the file consists of:
+その後、`.toolbarDefinition`をVimまたはPicoで編集できます。ファイルの構成を見てみましょう：
 
 ```
-# Button icon           action          parameter
+# ボタンアイコン 　　　　　アクション 　　　パラメータ
 arrow.right.to.line.alt insertString    \u{0009}
 chevron.up.square       systemAction    control
 escape                  insertString    \u{001B}
@@ -91,32 +90,32 @@ arrow.left              systemAction    left
 arrow.right             systemAction    right
 ```
 
-The file is divided into lines, and each line defines a button. There are two parts of it, respectively managing the left and the right end of the toolbar, separated by `separator`.&#x20;
+ファイルは行に分かれており、各行がボタンを定義しています。それぞれがツールバーの左端と右端を管理する2つの部分があり、`separator` によって区切られています。
 
-There are three parts of each line: `icon`, `action` and `parameter`. Icons can be a symbol of SF Symbols or a string of characters. For an introduction of SF Symbols, see: [https://developer.apple.com/sf-symbols/](https://developer.apple.com/sf-symbols/), actions can be `insertString`, `systemAction` or `insertCommand`, and parameters defines what to do exactly.&#x20;
+各行には3つのパーツがあります：`icon`、`action`、および `parameter`。アイコンはSF Symbolsのシンボルまたは文字列のシンボルであることができます。SF Symbolsの紹介については、[https://developer.apple.com/sf-symbols/](https://developer.apple.com/sf-symbols/) を参照してください。アクションは `insertString`、`systemAction`、または `insertCommand` で、パラメータは具体的に何を行うかを定義します。
 
-`insertString` is to insert a string when pressing the button. At this time, the parameter is the string to be inserted. Special characters like `\n` or `\u{0009}` are supported so keys like Escape are not hard to add. On the contrary, the parameter of `systemAction` can be one of `up`, `down`, `left`, `right`, `control`, `cut`, `copy` or `paste`, and the parameter of `insertCommand` can be a short command. At this time, the output of the command would be inserted at the cursor position.
+`insertString` はボタンが押されたときに文字列を挿入します。このとき、パラメータは挿入される文字列です。`\n` や `\u{0009}` のような特殊文字がサポートされており、Escapeなどのキーを追加するのは難しくありません。それに対して、`systemAction` のパラメータは `up`、`down`、`left`、`right`、`control`、`cut`、`copy`、または `paste` のいずれかであり、`insertCommand` のパラメータは短いコマンドです。このとき、コマンドの出力はカーソル位置に挿入されます。
 
-On iOS/iPadOS 16, when “Use the iOS/iPadOS toolbar” is enabled on the Settings App, buttons can be grouped with brackets. They can be organized conveniently and be configured when to be displayed.&#x20;
+iOS/iPadOS 16では、Settingsアプリで「iOS/iPadOSツールバーを使用」が有効になっている場合、ボタンは括弧でグループ化されることがあります。これにより便利に整理でき、表示されるタイミングも設定できます。
 
-Here are some examples included in the generated file:
+以下は生成されたファイルに含まれるいくつかの例です：
 
-```
-# Example buttons:
+```markdown
+# ボタンの例:
 #
 # delete.backward       insertString    \u{007F}
 # return                insertString    \u{000D}
 # switch.2              insertString    vim .toolbarDefinition\n
 # calendar.badge.clock  insertCommand   date "+%Y_%m_%d"
 
-# Example groups (only with iPads and iOS-style toolbar). Max 15 commands in a submenu
+# グループの例（iPadおよびiOSスタイルのツールバーのみ）。サブメニューには最大15のコマンドがあります。
 # [
 #     scissors                      systemAction    cut
 #     arrow.up.doc.on.clipboard     systemAction    copy
 #     doc.on.clipboard              systemAction    paste
 # ] filemenu.and.cursorarrow
 
-# This one is shown only if no commands are running:
+# これは実行中のコマンドがない場合にのみ表示されます:
 # [="none"
 #     ls            insertString    ls -a ~/Documents/
 #     uname         insertString    uname -a
@@ -124,12 +123,10 @@ Here are some examples included in the generated file:
 #     date          insertString    date
 # ]
 
-# This one appears if you edit a Markdown file in Vim:
+# これはVimでMarkdownファイルを編集している場合に表示されます:
 # [="vim .*\.md"
 #     key               insertString    \u{001B}:q!\n
 #     bold              insertString    :s/\\%V.*\\%V./**&**\n
 #     italic            insertString    :s/\\%V.*\\%V./*&*\n
 #     strikethrough     insertString    :s/\\%V.*\\%V./\\~\\~&\\~\\~\n
 # ] contextualmenu.and.cursorarrow
-```
-

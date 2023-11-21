@@ -1,12 +1,12 @@
-# A guide for beginners
+# 初心者向けガイド
 
-You may have already found `a-Shell` on the App Store. `a-Shell` is a terminal emulator for iOS/iPadOS, which allows you to run various Unix commands, from importing the `python.rich` module to managing `vim` plugins. You can use `ffmpeg`, `python`, `lua`, `tex`, `perl`, `clang`, `wasm`, `jsc`, etc, and edit text using `vim` or nano-like `pico`. You can even run `JupyterLab`; also, `code-server` may be researched in the future.
+おそらく、App Store で `a-Shell` を見つけたことでしょう。`a-Shell` はiOS/iPadOS用のターミナルエミュレータで、`python.rich` モジュールのインポートから `vim` プラグインの管理まで、さまざまなUnixコマンドを実行できます。`ffmpeg`、`python`、`lua`、`tex`、`perl`、`clang`、`wasm`、`jsc`などを使用でき、`vim`またはnano風の`pico`を使用してテキストを編集できます。さらに、`JupyterLab` を実行することもできます。また、将来的には `code-server` も調査されるかもしれません。
 
-### What you can do
+### できること
 
-#### Basic commands and net commands
+#### 基本的なコマンドとネットワークコマンド
 
-As is expected, basic commands like `ls`, `cd` and `cp` are available of course. Many important net commands have been provided as well.
+予想されるように、もちろん `ls`、`cd`、`cp`などの基本的なコマンドが使用できます。多くの重要なネットワークコマンドも提供されています。
 
 ```sh
 $ ping google.com -c 4
@@ -28,46 +28,46 @@ Name:   apple.com
 Address: 198.18.0.37
 ```
 
-`man` command is also provided, so you can read the manuals of basic commands easily.
+`man` コマンドも提供されているため、基本的なコマンドのマニュアルを簡単に読むことができます。
 
-<figure><img src=".gitbook/assets/68F0411E-EB70-4EEA-8E82-3119770F7787.jpeg" alt=""><figcaption><p>Manual of make</p></figcaption></figure>
+<figure><img src=".gitbook/assets/68F0411E-EB70-4EEA-8E82-3119770F7787.jpeg" alt=""><figcaption><p>make のマニュアル</p></figcaption></figure>
 
-#### Get more packages
+#### パッケージを追加
 
-A tool called `pkg` can be used to install some extra commands. You can use `pkg install` to get more commands:
+`pkg` と呼ばれるツールを使用して、いくつかの追加コマンドをインストールできます。次のようにして `pkg install` を使用してさらなるコマンドを取得できます：
 
 ```sh
 $ pkg install zip
 ```
 
-Use `pkg list` to list all packages already-installed and `pkg search <package name>` to search if a package is available. To see all available packages, use `pkg search`. To remove a package, use `pkg remove <package name>`.
+`pkg list` を使用してすでにインストールされているすべてのパッケージを一覧表示し、`pkg search <パッケージ名>` を使用してパッケージが利用可能かどうかを検索できます。すべての利用可能なパッケージを表示するには、`pkg search` を使用します。パッケージを削除するには、`pkg remove <パッケージ名>` を使用します。
 
-The variable `$PKG_SERVER` defines the address to get packages. If the variable is not set, the default repository [https://github.c\
-om/holzschu/a-Shell-commands](https://github.com/holzschu/a-Shell-commands) would be used. You can set the repository you use by setting the variable:
+変数 `$PKG_SERVER` はパッケージを取得するアドレスを定義します。変数が設定されていない場合、デフォルトのリポジトリ [https://github.c\
+om/holzschu/a-Shell-commands](https://github.com/holzschu/a-Shell-commands) が使用されます。変数を設定して使用するリポジトリを指定できます：
 
 ```sh
 $ export PKG_SERVER=https://github.com/holzschu/a-Shell-commands 
 ```
 
-If you can’t get or search for any package, there may be something wrong with `$PKG_SERVER`. Try to unset it to switch to the default repository:
+パッケージを取得または検索できない場合は、`$PKG_SERVER` に何か問題があるかもしれません。デフォルトのリポジトリに切り替えるには、それをアンセットしてみてください：
 
 ```sh
 $ unsetenv PKG_SERVER
 ```
 
-#### Edit text files
+#### テキストファイルの編集
 
-So far three text editors are provided: `vim`, `pico` and `ed`.
+これまでに3つのテキストエディタが提供されています: `vim`、`pico`、および `ed`。
 
-Vim users may be happy to see Vim plugins just work, but plugin managers like `vim-plug` have many problems. Therefore, it’s suggested to use Vim 8’s built-in package manager. See [configure-your-vim.md](basic-tutorials/configure-your-vim.md "mention") for details.
+Vim ユーザーは、Vim プラグインがうまく動作することに喜ぶかもしれませんが、`vim-plug` のようなプラグインマネージャには多くの問題があります。そのため、Vim 8 の組み込みパッケージマネージャを使用することが推奨されています。詳細については、[configure-your-vim.md](basic-tutorials/configure-your-vim.md "mention") を参照してください。
 
-<figure><img src=".gitbook/assets/89BA884C-9395-4E53-9284-97E69E3CE2A9.jpeg" alt=""><figcaption><p>Vim interface</p></figcaption></figure>
+<figure><img src=".gitbook/assets/89BA884C-9395-4E53-9284-97E69E3CE2A9.jpeg" alt=""><figcaption><p>Vim インターフェース</p></figcaption></figure>
 
-If you are not used to Vim and looking for a simpler text editor, `pico` will suit your needs. GNU Nano under GPL can’t be included in a-Shell due to FSF’s policy, so `pico` is included to provide a similar experience.
+Vim に慣れておらず、よりシンプルなテキストエディタをお探しの場合は、`pico` が適しています。GPLの下で提供されているGNU Nanoは、FSFのポリシーによりa-Shellに含めることができません。そのため、同様のエクスペリエンスを提供するために `pico` が含まれています。
 
-<figure><img src=".gitbook/assets/D884DB64-276A-46D6-8ED6-789FBD167C1C.jpeg" alt=""><figcaption><p>Pico interface</p></figcaption></figure>
+<figure><img src=".gitbook/assets/D884DB64-276A-46D6-8ED6-789FBD167C1C.jpeg" alt=""><figcaption><p>Pico インターフェース</p></figcaption></figure>
 
-A toy, `ed`, is also included. `ed` is a line editor, which allows one to input editing commands line by line. For the example below, `r`, `,p`, `1`, `2`, `3`, `4` and `q` are commands inside, and others are the outputs by `ed`.
+また、おもちゃのような `ed` も含まれています。`ed` は行エディタで、行ごとに編集コマンドを入力できます。以下の例では、`r`、`,p`、`1`、`2`、`3`、`4`、および `q` は `ed` 内のコマンドであり、他のものは `ed` によって出力されたものです。
 
 ```
 $ ed
@@ -94,21 +94,21 @@ q
 $
 ```
 
-#### Remote SSH/SFTP
+#### リモート SSH/SFTP
 
-SSH connecting is available. Just use `ssh`, `scp` and `sftp` as you’ve got used to. Use `ssh-keygen` to generate SSH keys. `mosh` and `sshd` are not supported yet.
+SSH接続が利用可能です。`ssh`、`scp`、`sftp` をこれまで通りに使用してください。SSHキーを生成するには `ssh-keygen` を使用します。`mosh` と `sshd` はまだサポートされていません。
 
 #### Python 3
 
-you can run Python easily.
+Pythonを簡単に実行できます。
 
 ```sh
 $ python
->>> print (“Hello, world!”)
+>>> print("Hello, world!")
 Hello, world!
 ```
 
-You can also install modules using `pip`. So far `clang` can not deal with Python modules properly, so they must be written in pure Python.
+`pip`を使用してモジュールをインストールすることもできます。現時点では、`clang`はPythonモジュールを適切に処理できないため、それらは純粋なPythonで記述する必要があります。
 
 ```sh
 $ pip install requests
@@ -154,25 +154,25 @@ lenium-4.8.3 sortedcontainers-2.4.0 trio-0.22.0 trio-websocket-0.10.2 wsproto-1.
 
 #### Lua and Perl
 
-Other script languages like Lua do work.
+他のスクリプト言語であるLuaも機能します。
 
 ```sh
 $ lua
 Lua 5.4.4  Copyright (C) 1994-2022 Lua.org, PUC-Rio
-> print ("Hello, world!")
+> print("Hello, world!")
 Hello, world!
 ```
 
-Perl also works.
+Perlも機能します。
 
-```
+```sh
 $ perl test.pl
 Hello, world!
 ```
 
 #### JavaScript
 
-The JS environment of WebKit is included. You can use `jsc` to run normal JavaScript codes.
+WebKitのJS環境が含まれています。通常のJavaScriptコードを実行するには`jsc`を使用できます。
 
 ```sh
 $ echo 'console.log("Hello, world!");' > test.js
@@ -180,8 +180,8 @@ $ jsc test.js
 Hello, world!
 ```
 
-It will be a hard thing to have `node.js` included. Possibilities exist to make them run with `jsc` but so far nobody has tried. In the chapter _Let’s do more for it_ this problem will be talked about.
+`node.js`を含めるのは難しいことです。`jsc`で実行できるようにする可能性は存在しますが、現時点では誰も試みていません。この問題については、章「さらに進んでみましょう」で話します。
 
 #### C/C++ and WebAssembly
 
-Thanks to WebAssembly, it’s not impossible to compile projects written in C/C++. With `clang`, we can compile C codes into WebAssembly, and with `wasm`, we can run them easily. In fact, almost all commands installed by `pkg` are distributed in WebAssembly.
+WebAssemblyのおかげで、C/C++で書かれたプロジェクトをコンパイルすることができます。`clang`を使用してCコードをWebAssemblyにコンパイルし、`wasm`を使用してそれらを簡単に実行できます。実際、`pkg`でインストールされたほとんどのコマンドはWebAssemblyで配布されています。

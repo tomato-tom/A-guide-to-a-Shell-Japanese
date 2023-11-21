@@ -1,12 +1,12 @@
-# Configure lg2 for version controlling
+# `lg2`を使ったバージョン管理の設定
 
-A number of users have been seeking for an available version controlling tool for a long time. When it comes to that tool for iOS/iPadOS, many users may look at those for a special purpose, like Working Copy or Git Torch. However, the push functions are all collecting fees——Does anyone can accept a “free” Git client without `git push`? Also some Apps have built-in Git support, but none of them is free of charge, except SpckEditor. You can truly use Git on iSH, but the process of it is slow and unstable. Fortunately, a-Shell has a built-in Git support. This article focus on how to use `lg2` for version controlling on a-Shell.
+長い間、多くのユーザーが使用可能なバージョン管理ツールを探してきました。iOS/iPadOS向けのそのようなツールに関しては、多くのユーザーがWorking CopyやGit Torchなどの特定の目的のためのツールを見るかもしれません。ただし、`git push`なしで「無料」のGitクライアントを受け入れることができるでしょうか？また、一部のアプリには組み込みのGitサポートがありますが、SpckEditor以外はすべて有料です。iSHでは本当にGitを使用できますが、そのプロセスは遅く、不安定です。幸いにも、a-Shellには組み込みのGitサポートがあります。この記事では、a-Shellで`lg2`を使用してバージョン管理をする方法に焦点を当てています。
 
-### Git command?
+### Gitコマンドは？
 
-Some new users have already found there is a `git` package on the repository. However, it will just add a link to `lg2` so that you can use `git` command directly. It may be useful but be careful that there are differences between `git` and `lg2`. Due to FSF’s policy, the original `git` can not be included, but `lg2` is enough for most cases. Attention many tools to manage Git directories won’t work because of the differences even when you have `git` package installed.
+一部の新しいユーザーは、リポジトリに`git`パッケージがあることに気付いているかもしれません。しかし、これは単に`git`コマンドを直接使用できるようにするための`lg2`へのリンクを追加するだけです。これは便利かもしれませんが、`git`と`lg2`の間には違いがあることに注意してください。FSF（Free Software Foundation）のポリシーにより、オリジナルの`git`は含まれていませんが、ほとんどの場合には`lg2`で十分です。`git`パッケージをインストールしている場合でも、違いのために多くのGitディレクトリを管理するためのツールは動作しないことにも注意してください。
 
-Now let’s try to install the `git` command.
+さて、`git`コマンドをインストールしてみましょう。
 
 ```
 $ pkg install git
@@ -29,67 +29,67 @@ Creation complete
 Done
 ```
 
-Now you can use either `git` or `lg2` to manage Git repositories.
+これで、`git`または`lg2`のいずれかを使用してGitリポジトリを管理できます。
 
-### SSH configuration
+### SSHの設定
 
-You may want a SSH key to link to GitHub or other Git repositories. Let’s generate an SSH key first.
+GitHubや他のGitリポジトリにリンクするためにSSHキーが必要な場合があります。まずSSHキーを生成しましょう。
 
 ```
-$ ssh-keygen -t ed25519 -c “<user name>”
+$ ssh-keygen -t ed25519 -c "<user name>"
 ```
 
-Some users prefer `rsa`. Attention sometimes RSA keys don’t work for GitHub or some other websites because of a confusing SHA-1 problem. If you meet the problem too, try `ed25519` or `ecdsa`. Choose a path and the name for your keys, set a password or not with the tutorial, and then upload your public key to the Git server. You can get a lot of useful information by searching it about how to upload it to GitHub or somewhere else. Now we’ll test it:
+一部のユーザーは `rsa` を好むことがあります。ただし、時々RSAキーはGitHubや他のウェブサイトでSHA-1の問題が原因で動作しないことがあります。この問題に遭遇した場合は、`ed25519`または`ecdsa`を試してみてください。鍵のパスと名前を選択し、チュートリアルに従ってパスワードを設定するかどうかを決定し、次に公開鍵をGitサーバーにアップロードします。GitHubや他の場所にアップロードする方法についての有益な情報は、検索して得ることができます。それではテストしてみましょう：
 
 ```
 $ ssh -T git@github.com
-Hi <your name>! You've successfully authenticated, but GitHub does not pr
-ovide shell access.
+Hi <your name>! You've successfully authenticated, but GitHub does not provide shell access.
 ```
 
-That’s good. Now we‘ll configure the user name and the email.
+これで問題ありません。次にユーザー名とメールアドレスを設定します。
 
 {% hint style="warning" %}
-There are problems with this part!
+この部分に問題があります！
 {% endhint %}
 
 ```
-$ lg2 config —-global user.name “<your name>”
-$ lg2 config —-global user.email “<your email>”
+$ lg2 config --global user.name "<your name>"
+$ lg2 config --global user.email "<your email>"
 ```
 
-To avoid being prompted for the key to use and your password each time, you can add
+各コマンドが機能しない場合、以下のようにキーとパスワードを毎回入力されないようにするために、次のように追加できます。
 
 ```
-$ lg2 config —-global user.identityFile "~/Documents/.ssh/<private key filename>”
-$ lg2 config —-global user.password “<your password>”
+$ lg2 config --global user.identityFile "~/Documents/.ssh/<private key filename>"
+$ lg2 config --global user.password "<your password>"
 ```
 
-If these commands don't work, you can manually create a global configuration file:
+これらのコマンドが機能しない場合、次のように手動でグローバル設定ファイルを作成できます：
 
 ```
 vim ~/Documents/.gitconfig
 ```
 
-Then put
+次に、ファイルの本文に以下を追加します：
 
 ```
 [user]
        name = <your name>
        email = <your email>
 ```
-in the body of the file. For more information on the configuration possibilities and required syntax, see the [Git Book](https://git-scm.com/docs/git-config#_configuration_file). If you put sensitive information in the file, such as SSH key passphrases, you should set file permissions appropriately to limit risks, using `chmod`.
 
-### Cloning and other operations
+設定の可能性と必要な構文についての詳細な情報については、[Git Book](https://git-scm.com/docs/git-config#_configuration_file)を参照してください。ファイルにSSHキーのパスフレーズなどの機密情報を含める場合は、`chmod`を使用して適切にファイルのアクセス権を設定してリスクを制限する必要があります。
 
-You can clone any repositories naturally:
+### クローンおよびその他の操作
+
+任意のリポジトリを自然にクローンできます：
 
 ```
 $ lg2 clone https://github.com/holzschu/a-shell.git
 ```
 
-Then you’ll see `a-shell.git` on the current dictionary. On the contrary, for a normal computer with standard `git` command, the dictionary would be named `a-shell`. You can remove the `.git` of the url to let it look less outstanding. Actually, all basic commands works well including `lg2 push origin`, but there are still some won’t work, like drawing the commit graph. Enjoy your version controlling trip!
+その後、現在のディレクトリに `a-shell.git` が表示されます。逆に、通常の`git`コマンドを使用した通常のコンピューターでは、ディレクトリは `a-shell` となります。URLの `.git` を削除して目立たなくすることもできます。実際には、`lg2 push origin`を含むすべての基本的なコマンドが正常に動作しますが、コミットグラフの描画など一部は動作しません。バージョン管理の旅をお楽しみください！
 
-### Does a-Shell support Subversion, CVS or other alternatives?
+### a-ShellはSubversion、CVS、またはその他の代替をサポートしていますか？
 
-No. Open an issue if you want.
+いいえ。サポートが必要な場合は、イシューをオープンしてください。

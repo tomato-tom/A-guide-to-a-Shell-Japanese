@@ -1,24 +1,24 @@
-# Table of contents
+# 目次
 
-* [About the book](README.md)
-* [Contribute to the book](contribute-to-the-book.md)
+* [本について](README.md)
+* [本への貢献](contribute-to-the-book.md)
 
-## Basic tutorials
+## 基本チュートリアル
 
-* [A guide for beginners](<README (1).md>)
-* [A-Shell’s differences](basic-tutorials/a-shells-differences.md)
-* [Configure fonts, colors and the toolbar](basic-tutorials/configure-fonts-colors-and-the-toolbar.md)
-* [Configure the Shell](basic-tutorials/configure-the-shell.md)
-* [Configure lg2 for version controlling](basic-tutorials/configure-lg2-for-version-controlling.md)
-* [Configure your Vim](basic-tutorials/configure-your-vim.md)
-* [Run Jupyter](basic-tutorials/run-jupyter.md)
+* [初心者向けガイド](<README (1).md>)
+* [A-Shellの違い](basic-tutorials/a-shells-differences.md)
+* [フォント、色、およびツールバーの設定](basic-tutorials/configure-fonts-colors-and-the-toolbar.md)
+* [シェルの設定](basic-tutorials/configure-the-shell.md)
+* [lg2の設定（バージョン管理）](basic-tutorials/configure-lg2-for-version-controlling.md)
+* [Vimの設定](basic-tutorials/configure-your-vim.md)
+* [Jupyterの実行](basic-tutorials/run-jupyter.md)
 
-## Let’s do more for it
+## もっとできるようにしましょう
 
-* [Before the hard part](lets-do-more-for-it/before-the-hard-part.md)
-* [Compile a simple command with a-Shell](lets-do-more-for-it/compile-a-simple-command-with-a-shell.md)
-* [Submit new packages](lets-do-more-for-it/submit-new-packages.md)
+* [ハードな部分の前に](lets-do-more-for-it/before-the-hard-part.md)
+* [a-Shellで単純なコマンドをコンパイルする](lets-do-more-for-it/compile-a-simple-command-with-a-shell.md)
+* [新しいパッケージを提出する](lets-do-more-for-it/submit-new-packages.md)
 
 ***
 
-* [Ended?](ended.md)
+* [終了？](ended.md)

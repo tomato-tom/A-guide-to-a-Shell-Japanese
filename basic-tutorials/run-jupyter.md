@@ -1,9 +1,9 @@
-# Run Jupyter
+# Jupyterの実行
 
 {% hint style="info" %}
-This article is still on progress. If you have the experience of it, you are welcomed to contribute.
+この記事はまだ進行中です。もし経験があれば、お気軽に貢献してください。
 {% endhint %}
 
-JupyterLab and Jupyter Notebook work well on a-Shell. If you just want to run Jupyter Notebook on your device, you may have a look at Carnets. With a built-in interface, you will have an better experience there.
+JupyterLabとJupyter Notebookは、a-Shellでうまく動作します。デバイスでJupyter Notebookを実行したいだけの場合、Carnetsを試してみることをお勧めします。組み込みのインターフェースがあるため、そちらでより良いエクスペリエンスを得ることができます。
 
-### Run JupyterLab
+### JupyterLabの実行

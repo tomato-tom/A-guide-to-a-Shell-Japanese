@@ -1,23 +1,23 @@
-# About the book
+# この本について
 
-`a-Shell` is a terminal emulator for iOS/iPadOS, where you can run Unix commands.
+`a-Shell`はUnixコマンドを実行できるiOS/iPadOS用のターミナルエミュレータです。
 
-This document is a tutorial for newcomers to know how to do various things on this app, from editing text files to compiling big projects.
+このドキュメントは、このアプリでさまざまなことを行う方法を知りたい初心者向けのチュートリアルです。テキストファイルの編集から大きなプロジェクトのコンパイルまで、様々なことを学ぶことができます。
 
-The tutorial is still in progress. Anyone willing to is encouraged to contribute to this document. See [contribute-to-the-book.md](contribute-to-the-book.md "mention") for details.
+このチュートリアルはまだ進行中です。このドキュメントに貢献したい方は、[contribute-to-the-book.md](contribute-to-the-book.md)を参照してください。
 
-This work is published under CC BY-SA 4.0 license. Feel free to share it around.
+この作品はCC BY-SA 4.0ライセンスの下で公開されています。自由に共有してください。
 
-If you know little about `a-Shell`, you can start by reading [README (1).md](<README (1).md> "mention").
+`a-Shell`についてよく知らない場合は、[README (1).md](README%20(1).md)を読むことから始めることができます。
 
 {% hint style="danger" %}
-The command line code blocks of this guide are NOT designed to copy and run in the terminal directly. Be cautious before you run any commands showed in this guide or you might meet errors. Input them manually instead.
+このガイドのコマンドラインのコードブロックは、直接ターミナルでコピーして実行するために設計されていません。このガイドに表示されるコマンドを実行する前に注意してください。手動で入力してください。
 {% endhint %}
 
-### Official links of a-Shell
+### a-Shellの公式リンク
 
-**GitHub repo:** [**https://github.com/holzschu/a-shell**](https://github.com/holzschu/a-shell)
+**GitHubリポジトリ:** [**https://github.com/holzschu/a-shell**](https://github.com/holzschu/a-shell)
 
-**Official site:** [**https://holzschu.github.io/a-Shell\_iOS/**](https://holzschu.github.io/a-Shell\_iOS/)
+**公式サイト:** [**https://holzschu.github.io/a-Shell\_iOS/**](https://holzschu.github.io/a-Shell_iOS/)
 
 **Discord:** [**https://discord.gg/2KAAfTpnRb**](https://discord.gg/2KAAfTpnRb)

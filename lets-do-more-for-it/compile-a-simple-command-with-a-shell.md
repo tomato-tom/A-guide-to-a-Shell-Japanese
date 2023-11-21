@@ -1,10 +1,10 @@
-# Compile a simple command with a-Shell
+# a-Shellでシンプルなコマンドをコンパイルする
 
-This article focus on compiling a small file or project written in C/C++ with a-Shell’s own tool chain. Due to Apple’s limitations, they can only be compiled to WebAssembly instead of native codes, so don’t dream for `emacs` or `fish`!
+この記事では、a-Shell独自のツールチェーンを使用して書かれた小さなファイルまたはプロジェクトをコンパイルすることに焦点を当てています。Appleの制約により、これらはネイティブコードではなくWebAssemblyにのみコンパイルできるため、`emacs`や`fish`などを期待しないでください。
 
-### Meet clang, clang++ and wasm
+### clang、clang++、wasmとの出会い
 
-Let’s start from compiling a single program file. Here are two examples:
+単一のプログラムファイルをコンパイルから始めましょう。以下は2つの例です：
 
 ```c
 // test.c
@@ -27,37 +27,37 @@ int main(){
 }
 ```
 
-To compile, we use `clang` and `clang++` respectively. We use `-o` to set the name of the output file (they can end with `.wasm` or not).
+コンパイルするには、それぞれ `clang` と `clang++` を使用します。出力ファイルの名前を設定するために `-o` を使用します（これらは `.wasm` で終わってもしなくてもかまいません）。
 
-```
+```bash
 $ clang test.c -o testc
 $ clang++ test.cpp -o testcpp.wasm
 ```
 
-Then run the compiled files with `wasm`. You can either call `wasm` to run it or execute it directly like binary code.
+次に、コンパイルされたファイルを `wasm` で実行します。`wasm` を呼び出して実行するか、それをバイナリコードのように直接実行できます。
 
-```
+```bash
 $ ./testc
 Hello, world!
 $ wasm testcpp.wasm
 Hello, world!
 ```
 
-You may receive a message `wasm: Error:` sometimes. When you do, try to close all the open windows then retry.
+時々 `wasm: Error:` というメッセージが表示されることがあります。その場合はすべての開いているウィンドウを閉じてから再試行してみてください。
 
-### Meet make
+### makeを使ってみよう
 
-For big projects, it’ll be a difficult job to input commands to compile all files line by line. Usually, `make` is used to do it automatically. `make` seeks for the makefile of the project and do as it directs when it works. You may have known a famous way to compile and install a project from source codes:
+大規模なプロジェクトの場合、すべてのファイルに対してコンパイルコマンドを一行ずつ入力するのは難しい仕事です。通常、`make`を使用して自動的に行います。`make`はプロジェクトのmakefileを探し、それが動作するように指示されたとおりに実行します。ソースコードからプロジェクトをコンパイルしてインストールする有名な方法を知っているかもしれません：
 
-```
+```bash
 $ ./configure
 $ make
 $ make install
 ```
 
-For the example above, `./configure` generates the makefile according to your platform, `make` compiles the project according to the makefile, and `make install` installs it to the computer. However, sometimes `./configure` really doesn’t know the difference between a-Shell and WebAssembly, so it may do the wrong work and mess it up.
+上記の例では、`./configure`はプラットフォームに応じてmakefileを生成し、`make`はmakefileに従ってプロジェクトをコンパイルし、`make install`はそれをコンピュータにインストールします。ただし、`./configure`は本当にa-ShellとWebAssemblyの違いを知らない場合がありますので、誤った作業をしてしまうことがあります。
 
-Now let’s see a simple project: `unrar`. It’s simple enough that there is no script like `configure` to generate makefiles. First of all get the whole source code, and here are parts of the short makefile:
+それでは、シンプルなプロジェクト `unrar` を見てみましょう。`configure`のようなスクリプトがないほどシンプルなので、まずソースコード全体を取得し、以下は簡略化されたmakefileの一部です：
 
 ```makefile
 # Linux using GCC
@@ -90,18 +90,18 @@ OBJECTS=rar.o strlist.o strfn.o pathfn.o smallfn.o global.o file.o filefn.o filc
 	$(COMPILE) -D$(WHAT) -c $<
 ```
 
-Now we’ll revise the makefile to let it suit our tool chain. Before that, we need to know:
+これを私たちのツールチェーンに合わせるためにmakefileを修正してみましょう。その前に知る必要があることは次のとおりです。
 
-* `CXX` means the compiler being used. It’ll be `clang++` for a-Shell.
-* `CXXFLAGS` and `DEFINES` means the options of the compiler.
-* `-O2` means O2 optimization, working with `clang++`.
-* `-Wno-logical-op-parentheses -Wno-switch -Wno-dangling-else` will be not needed.
-* `-D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -DRAR_SMP` is for 32-bit systems to deal with large files. For a 64-bit system, it‘s useless but harmless.
-* `/usr` won’t be accessible on a-Shell. Actually `~/Library` acts as `/usr` so it‘ll be used instead.
-* `-fPIC` is means Position Independent Code for dynamic link libraries, working with `clang++`.
-* `-pthread` means multiple threads, and is not provided by WebAssembly yet, so it doesn’t work with a-Shell.
+- `CXX` は使用されているコンパイラを意味します。a-Shellの場合は `clang++` になります。
+- `CXXFLAGS` および `DEFINES` はコンパイラのオプションを意味します。
+- `-O2` は `clang++` と連動する O2 最適化を意味します。
+- `-Wno-logical-op-parentheses -Wno-switch -Wno-dangling-else` は不要です。
+- `-D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -DRAR_SMP` は大きなファイルを処理するための32ビットシステム向けです。64ビットシステムでは無駄でも無害です。
+- `/usr` はa-Shellではアクセスできません。実際、 `~/Library` が `/usr` として機能するので、その代わりに使用されます。
+- `-fPIC` は動的リンクライブラリ用の位置に依存しないコードを意味します。
+- `-pthread` は複数のスレッドを意味し、WebAssemblyではまだ提供されていないため、a-Shellでは動作しません。
 
-Then the makefile can be revised to:
+次に、makefileを以下のように修正できます：
 
 ```makefile
 # a-Shell using clang++
@@ -116,12 +116,6 @@ DESTDIR=~/Library
 ...
 ```
 
-Now let’s try to compile it:
-
-```bash
-$ make
-```
-
 {% hint style="info" %}
-Actually this project does not work due to lack of APIs provided by WASI. We are looking for a project that the source code does work with a-Shell’s own tool chain. If you know one, please let us know.
+実際、このプロジェクトは、WASI（WebAssembly System Interface）が提供するAPIの不足により動作しません。a-Shell独自のツールチェーンで動作するソースコードを持つプロジェクトを探しています。もし知っているものがあれば、教えていただけますか。
 {% endhint %}
